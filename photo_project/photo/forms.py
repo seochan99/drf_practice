@@ -1,0 +1,16 @@
+from django import forms
+from .models import Photo
+
+# 폼제작
+
+
+class PhotoForm(forms.ModelForm):
+    class Meta:
+        model = Photo
+        fields = (
+            'title',
+            'author',
+            'image',
+            'description',
+            'price',
+        )
