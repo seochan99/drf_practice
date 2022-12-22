@@ -28,3 +28,17 @@ def photo_post(request):
     else:
         form = PhotoForm()
     return render(request, 'photo/photo_post.html', {'form': form})
+
+
+def photo_edit(request, pk):
+    photo = get_object_or_404(Photo, pk=pk)
+    if request.method == "POST":
+        # 인스턴스를 받아서 내용을 채워넣어줌
+        form = PhotoForm(request.POST, instance=photo)
+        if form.is_valid():
+            photo = form.save(commit=False)
+            photo.save()
+            return redirect('photo_detail', pk=photo.pk)
+    else:
+        form = PhotoForm(instance=photo)
+    return render(request, 'photo/photo_post.html', {'form': form})
