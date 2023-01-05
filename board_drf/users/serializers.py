@@ -12,6 +12,11 @@ from django.contrib.auth import authenticate
 # profile model 확장
 from .models import Profile
 
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ("nickname","position","subjects","image")
+
 # 회원가입
 class RegisterSerializer(serializers.ModelSerializer): #회원가입 시리얼 라이저
     # 이메일 
@@ -69,11 +74,4 @@ class LoginSerializer(serializers.Serializer):
             token = Token.objects.get(user=user) # 해당 유저의 토큰 가져오기 
             return token                         # 토큰 반환 
         raise serializers.ValidationError(
-                {"error":"TOKEN FIELDS DIDINT MATCH."}
-            )
-        return data
-
-class ProfileView(serializers.ModelSerializer):
-    class Meta:
-        model = Profile
-        fields = ("nickname","position","subjects","images")
+                {"error":"TOKEN FIELDS DIDINT MATCH."})
