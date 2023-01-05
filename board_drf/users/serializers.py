@@ -9,6 +9,9 @@ from rest_framework.validators import UniqueValidator # 이메일 중복 방지
 # 장고 기본 authenticate함수, 설정한 defailtAuthBackend TokenAuth 방식으로 유저 인증해줌 
 from django.contrib.auth import authenticate
 
+# profile model 확장
+from .models import Profile
+
 # 회원가입
 class RegisterSerializer(serializers.ModelSerializer): #회원가입 시리얼 라이저
     # 이메일 
@@ -69,3 +72,8 @@ class LoginSerializer(serializers.Serializer):
                 {"error":"TOKEN FIELDS DIDINT MATCH."}
             )
         return data
+
+class ProfileView(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ("nickname","position","subjects","images")
