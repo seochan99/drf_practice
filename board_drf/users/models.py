@@ -9,7 +9,7 @@ class Profile(models.Model):
     nickname = models.CharField(max_length=128)
     position = models.CharField(max_length=128)
     subjects = models.CharField(max_length=128)
-    image = models.ImageField(upload_to='profile/',deafult='deafult.png')
+    image = models.ImageField(upload_to='profile/',default='default.png')
 
 # post_saved이벤트 발생시 프로필 생성 
 # 직접 프로필 생성 코드 작성 하지 않아도 유저 생성 이벤트 감지해 프로필 자동생성 가능
